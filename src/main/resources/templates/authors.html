@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--step 1 - add this thymeleaf namespace, so that it's tags can be used in this doc -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Framework Guru</title>
+</head>
+<body>
+<h1>Authors List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+
+    <!-- th:each is alternative of angular's *ngFor -->
+    <tr th:each="author : ${authors}"> <!-- this 'authors' is the attribute we added in java controller file -->
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.firstName}"></td>
+        <td th:text="${author.lastName}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
