@@ -1,10 +1,9 @@
 package guru.springframework.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -14,11 +13,14 @@ public class Publisher {
     private Long id;
 
     private String name;
-
     private String addressLine1;
     private String city;
     private String state;
     private String zip;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
@@ -79,22 +81,25 @@ public class Publisher {
         this.zip = zip;
     }
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publisher publisher = (Publisher) o;
-        return Objects.equals(id, publisher.id) &&
-                Objects.equals(name, publisher.name) &&
-                Objects.equals(addressLine1, publisher.addressLine1) &&
-                Objects.equals(city, publisher.city) &&
-                Objects.equals(state, publisher.state) &&
-                Objects.equals(zip, publisher.zip);
+        return Objects.equals(id, publisher.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, addressLine1, city, state, zip);
+        return Objects.hash(id);
     }
 
     @Override
@@ -106,6 +111,7 @@ public class Publisher {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +
+                ", books=" + books +
                 '}';
     }
 }

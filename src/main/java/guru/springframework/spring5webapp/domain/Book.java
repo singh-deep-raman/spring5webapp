@@ -23,6 +23,10 @@ public class Book {
     // @JoinTable means a separate table will be created in DB which will have mapping for author-books
     // name = "author_book" is the name of the join table
     /** no argument constructor for JPA is must */
+
+    @ManyToOne
+    private Publisher publisher;
+
     public Book() {
     }
 
@@ -69,6 +73,14 @@ public class Book {
         this.authors = authors;
     }
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -76,6 +88,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", authors=" + authors +
+                ", publisher=" + publisher +
                 '}';
     }
 
